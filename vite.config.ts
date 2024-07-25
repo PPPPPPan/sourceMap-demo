@@ -8,7 +8,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 export default defineConfig({
   base: './',
   build:{
-    sourcemap: true
+    sourcemap: true,
   },
   plugins: [
     vue(),
