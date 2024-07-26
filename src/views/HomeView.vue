@@ -11,6 +11,10 @@ let tabActiveName = ref<string>('local')
 
 let dialogVisible = ref(false)
 
+let sourceMapLink = ref<any>(
+  'https://ppppppan.github.io/sourceMap-demo/assets/ErrorView-BGCnhUf-.js.map'
+)
+
 let stackFrameObj = {
   line: 0,
   column: 0,
@@ -39,6 +43,21 @@ const sourceMapUpload = async (file: any) => {
     dialogVisible.value = false
   }
   return false
+}
+
+const loadSourceMap = async () => {
+  let link = sourceMapLink.value
+  if (!link) return
+  fetch(link)
+    .then((response) => response.text())
+    .then(async (text) => {
+      const code = await getSource(text, stackFrameObj.line, stackFrameObj.column)
+      js_error.value.stack_frames[stackFrameObj.index].origin = code
+      dialogVisible.value = false
+    })
+    .catch((error) => {
+      console.error('Error fetching script:', error)
+    })
 }
 
 const getSource = async (sourcemap: any, line: number, column: number = 0) => {
@@ -119,7 +138,8 @@ onMounted(() => {
           </el-upload>
         </el-tab-pane>
         <el-tab-pane label="远程加载" name="origin">
-          远程加载
+          <el-input v-model="sourceMapLink" placeholder=""></el-input>
+          <el-button style="margin-top:10px" type="primary" @click="loadSourceMap">加载</el-button>
         </el-tab-pane>
       </el-tabs>
     </el-dialog>
