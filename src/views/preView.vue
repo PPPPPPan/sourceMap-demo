@@ -3,6 +3,7 @@
     <div class="error-detail">
       <pre class="err-code" v-html="preLine()"></pre>
     </div>
+  </div>
 </template>
 
 <script>
