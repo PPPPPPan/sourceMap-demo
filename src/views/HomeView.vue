@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import sourceMap from 'source-map-js'
+import PreView from './preView.vue'
 
 let js_error = ref<any>('')
 let isError = ref(false)
@@ -65,7 +66,6 @@ onMounted(() => {
     if (jsErrorList) {
       isError.value = true
       js_error.value = JSON.parse(jsErrorList)
-      console.log('js_error : >>>>>>>>>>>>>>>>', js_error.value)
     }
   } catch (error) {
     console.log('error : >>>>>>>>>>>>>>>>', error)
@@ -94,7 +94,10 @@ onMounted(() => {
         </el-row>
         <el-row :gutter="20">
           <template v-if="item.origin">
-            {{ item.origin }}
+            <PreView :origin="item.origin"></PreView>
+            <!-- <pre>
+              {{ item.origin.source }}
+            </pre> -->
           </template>
           <template v-else>
             <div>
