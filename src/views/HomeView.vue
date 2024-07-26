@@ -39,10 +39,10 @@ const sourceMapUpload = async (file: any) => {
   }
 }
 
-const getSource = async (sourceMap, line: number, column: number = 0) => {
+const getSource = async (sourcemap: any, line: number, column: number = 0) => {
   try {
     // 解析map文件
-    const consumer = await new sourceMap.SourceMapConsumer(JSON.stringify(sourceMap))
+    const consumer = await new sourceMap.SourceMapConsumer(JSON.parse(sourcemap))
     // 通过报错的位置查找对应的源文件的名称以及报错行数
     const originalPosition = consumer.originalPositionFor({
       line,
