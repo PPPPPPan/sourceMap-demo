@@ -14,7 +14,7 @@ export const useEventStore = defineStore('eventStore',{
   },
   actions: {
     setEvents(events) {
-      this.events.push(events)
+      this.events = events
     },
     getEvent() {
       return this.events

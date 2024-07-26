@@ -90,7 +90,6 @@ const onStart = () => {
   stopFn = rrweb.record({
     emit: (event) => {
       events.push(event)
-      console.log('event : >>>>>>>>>>>>>>>>', JSON.stringify(event))
     }
   })
 }

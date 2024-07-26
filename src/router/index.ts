@@ -26,6 +26,10 @@ const router = createRouter({
         path: '/record',
         name: 'record',
         component: () => import('../views/RecordScreen.vue')
+    },{
+        path: '/play',
+        name: 'play',
+        component: () => import('../views/PlayScreen.vue')
     }
   ]
 })
